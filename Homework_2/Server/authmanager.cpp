@@ -14,7 +14,7 @@ AuthManager::AuthManager(QObject *parent) : QObject(parent)
 void AuthManager::registering(const QString &login,
                               const QString &password)
 {
-    QUrl url("http://127.0.0.1:59325/register");
+    QUrl url("http://127.0.0.1:59165/register");
 
     QNetworkRequest requst(url);
     requst.setHeader(QNetworkRequest::ContentTypeHeader,
@@ -29,24 +29,20 @@ void AuthManager::registering(const QString &login,
 
     connect(reply, &QNetworkReply::finished,
             [this, reply](){
-        if (reply->error() != QNetworkReply::NoError) {
-            qDebug() << "Error: " << reply -> errorString();
-        }
-        else {
-            qDebug() << "Ok";
-        }
-        this->onAuthenticateFinished();
+        emit registerRequestCompleted(reply -> errorString());
+        reply -> deleteLater();
     });
 }
 
 void AuthManager::authenticate(const QString &login,
                                const QString &password)
 {
-    QUrl url ("http://127.0.0.1:59325/auth");
+    QUrl url ("http://127.0.0.1:59165/auth");
 
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
                      "application/json");
+
     QJsonObject body;
     body ["login"] = login;
     body ["password"] = password;
@@ -56,33 +52,9 @@ void AuthManager::authenticate(const QString &login,
 
     connect(reply, &QNetworkReply::finished,
             [this, reply](){
-        if (reply -> error() != QNetworkReply::NoError) {
-            qDebug() << "Error: " << reply -> errorString();
-        }
-        else {
-            QJsonObject obj = QJsonDocument::fromJson(reply -> readAll()).object();
-            QString token = obj.value("token").toString();
-            this->token = token;
-        }
-        this -> onRegisterFinished();
+                QJsonObject obj = QJsonDocument::fromJson(reply -> readAll()).object();
+                QString token = obj.value("token").toString();
+        emit authenticateRequestCompleted(reply -> errorString(), token);
         reply -> deleteLater();
     });
-}
-
-QString AuthManager::getToken()
-{
-    return this->token;
-}
-
-void AuthManager::onAuthenticateFinished()
-{
-    qDebug() << "Auth error: " << this -> authenticateError;
-    qDebug() << "Token: " << this -> getToken();
-    emit registerRequestCompleted(this -> authenticateError);
-}
-
-void AuthManager::onRegisterFinished()
-{
-    qDebug() << "Register error: " << this -> registerError;
-    emit registerRequestCompleted(this -> registerError);
 }

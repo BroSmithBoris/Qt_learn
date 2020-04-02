@@ -24,7 +24,6 @@ Window {
         source: (currentForm == "sign_in")
                 ? "qrc:/qml/SignInForm.qml"
                 : "qrc:/qml/SignUpForm.qml"
-
     }
 
     Row {
@@ -36,16 +35,10 @@ Window {
         ClickableText {
             id: signInButton
             text: "Sign in"
-            font.underline: true
+            font.underline: (currentForm == "sign_in") ? true : false
             onClicked: {
                 cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    if(currentForm == "sign_up") {
-                        signUpButton.font.underline = false
-                        signInButton.font.underline = true
-                        currentForm = "sign_in"
-                    }
-                }
+                onClicked: (currentForm == "sign_up") ? currentForm = "sign_in" : currentForm = "sign_up"
             }
         }
 
@@ -55,21 +48,15 @@ Window {
             font.pixelSize: bottomButtonSize
             anchors.bottom: parent.bottom
             color: bottomButtonColor
-
         }
 
         ClickableText{
             id: signUpButton
             text: "Sign up"
+            font.underline: (currentForm == "sign_up") ? true : false
             onClicked: {
                 cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    if(currentForm == "sign_in") {
-                        signInButton.font.underline = false
-                        signUpButton.font.underline = true
-                        currentForm = "sign_up"
-                    }
-                }
+                onClicked: (currentForm == "sign_in") ? currentForm = "sign_up" : currentForm = "sign_in"
             }
         }
     }
