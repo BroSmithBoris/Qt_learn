@@ -35,10 +35,10 @@ Window {
         ClickableText {
             id: signInButton
             text: "Sign in"
-            font.underline: (currentForm == "sign_in") ? true : false
+            font.underline: currentForm == "sign_in"
             onClicked: {
                 cursorShape: Qt.PointingHandCursor
-                onClicked: (currentForm == "sign_up") ? currentForm = "sign_in" : currentForm = "sign_up"
+                currentForm == "sign_up" ? currentForm = "sign_in" : currentForm = "sign_up"
             }
         }
 
@@ -53,10 +53,10 @@ Window {
         ClickableText{
             id: signUpButton
             text: "Sign up"
-            font.underline: (currentForm == "sign_up") ? true : false
+            font.underline: currentForm == "sign_up"
             onClicked: {
                 cursorShape: Qt.PointingHandCursor
-                onClicked: (currentForm == "sign_in") ? currentForm = "sign_up" : currentForm = "sign_in"
+                currentForm == "sign_in" ? currentForm = "sign_up" : currentForm = "sign_in"
             }
         }
     }
