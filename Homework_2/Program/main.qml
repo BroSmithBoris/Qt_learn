@@ -36,10 +36,7 @@ Window {
             id: signInButton
             text: "Sign in"
             font.underline: currentForm == "sign_in"
-            onClicked: {
-                cursorShape: Qt.PointingHandCursor
-                currentForm = "sign_in"
-            }
+            onClicked: currentForm = "sign_in"
         }
 
         Text {
@@ -54,10 +51,7 @@ Window {
             id: signUpButton
             text: "Sign up"
             font.underline: currentForm == "sign_up"
-            onClicked: {
-                cursorShape: Qt.PointingHandCursor
-                currentForm = "sign_up"
-            }
+            onClicked: currentForm = "sign_up"
         }
     }
 }
