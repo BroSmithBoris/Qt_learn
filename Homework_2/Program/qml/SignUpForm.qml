@@ -46,7 +46,7 @@ Item {
         anchors.top: signUpPassword.bottom
         anchors.topMargin: 10
         placeholderText: "repeat password"
-        echoMode: "Password"
+        echoMode: TextInput.Password
         font.pixelSize: textFieldSize
     }
 
