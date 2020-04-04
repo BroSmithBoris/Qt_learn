@@ -20,8 +20,8 @@ private:
     QNetworkAccessManager _net;
 
 signals:
-    void registerRequestCompleted(QString);
-    void authenticateRequestCompleted(QString, QString);
+    void registerRequestCompleted(QString error);
+    void authenticateRequestCompleted(QString error, QString token);
 };
 
 #endif // AUTHMANAGER_H
