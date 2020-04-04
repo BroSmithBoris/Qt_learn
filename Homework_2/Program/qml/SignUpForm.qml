@@ -35,7 +35,7 @@ Item {
         anchors.top: signUpLogin.bottom
         anchors.topMargin: 10
         placeholderText: "password"
-        echoMode: "Password"
+        echoMode: TextInput.Password
         font.pixelSize: textFieldSize
     }
 
