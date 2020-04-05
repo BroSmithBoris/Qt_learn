@@ -9,11 +9,7 @@ Window {
     title: qsTr("Authorization")
     color: "white"
     flags: Qt.Dialog |  Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowCloseButtonHint | Qt.WindowSystemMenuHint
-    property int marginIndent: 30
-    property int titleTextSize: 25
-    property int textFieldSize: 18
     property int bottomButtonSize: 17
-    property string titleTextColor: "#404040"
     property string bottomButtonColor: "#404040"
     property string currentForm: "sign_in"
 

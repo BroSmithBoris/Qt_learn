@@ -3,9 +3,9 @@ import QtQuick.Controls 2.12
 
 Text{
     id: clickableText
-    font.pixelSize: bottomButtonSize
+    font.pixelSize: 17
     anchors.bottom: parent.bottom
-    color: bottomButtonColor
+    color: "#404040"
 
     signal clicked();
 
